@@ -9,11 +9,39 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers';
 
+import path from 'path';
+const pathSrc = path.resolve(__dirname, 'src');
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '~/': `${pathSrc}/`,
+      //解决开发环境下的警告
+      'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "~/assets/styles/variable/index.scss" as *;`,
+      },
+    },
+  },
+  server: {
+    // 是否开启 https
+    https: false,
+    // 端口号
+    port: 3000,
+    host: '0.0.0.0',
+    // 本地跨域代理
+    proxy: {
+      '/api': {
+        target: 'https://api.github.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
   plugins: [
@@ -59,7 +87,7 @@ export default defineConfig({
       // 忽略的文件
       // exclude: ['src/components/exclude'],
       // 自定义组件的解析器
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver({importStyle: 'sass'})],
     }),
   ],
   build: {

@@ -1,32 +1,53 @@
 <script setup>
 import HelloWorld from '@/components/HelloWorld.vue';
+import {useUserStore} from '@/stores/user';
+const userStore = useUserStore();
+const names = computed(() => userStore.name);
+// state 也可以使用解构，但使用解构会使其失去响应式，这时候可以用 pinia 的 storeToRefs。
+// import {storeToRefs} from 'pinia';
+const {name} = storeToRefs(userStore);
+function changeNamme() {
+  // 直接修改 state
+  userStore.name = '李四';
+  // 一般不建议这么做，建议通过 actions 去修改 state，action 里可以直接通过 this 访问
+  console.log('三秒钟后会变成王五');
+  setTimeout(() => {
+    userStore.updateName('王五');
+  }, 3000);
+}
 </script>
-
 <template>
   <header>
     <logo />
     <img alt="Vue logo" class="logo" src="@/assets/svg/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
-  <el-button type="info">Info</el-button>
+  <div>
+    <el-button type="primary">Info</el-button>
+    <div>
+      {{ userStore.name }}|{{ name }}||{{ names }}|{{ userStore.fullName }}
+
+      <el-button @click="changeNamme">修改name</el-button>
+    </div>
+    <div />
+  </div>
   <RouterView />
 </template>
 
-<style>
+<style lang="scss">
 @import '@/assets/base.css';
 
 #app {
   max-width: 1280px;
   padding: 2rem;
   margin: 0 auto;
+  background-color: $grew;
   font-weight: normal;
 }
 

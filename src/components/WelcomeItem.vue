@@ -62,7 +62,7 @@ h3 {
     left: 0;
     height: calc(50% - 25px);
     border-left: 1px solid var(--color-border);
-    content: " ";
+    content: ' ';
   }
 
   .item::after {
@@ -71,7 +71,7 @@ h3 {
     left: 0;
     height: calc(50% - 25px);
     border-left: 1px solid var(--color-border);
-    content: " ";
+    content: ' ';
   }
 
   .item:first-of-type::before {

@@ -34,5 +34,13 @@ module.exports = {
         order: ['script', 'template', 'style'],
       },
     ],
+    'vue/v-on-event-hyphenation': [
+      'error',
+      'always',
+      {
+        autofix: true,
+        ignore: [],
+      },
+    ],
   },
 };

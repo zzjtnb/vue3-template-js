@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "prepare": "husky install",
-    "lint:eslint": "eslint --cache --cache-location .cache/eslint/ --max-warnings 0  \"src/**/*.{vue,ts}\" --fix",
+    "lint:eslint": "eslint --cache --cache-location .cache/eslint/ --max-warnings 0  \"src/**/*.{vue,js}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.(js|json|css|scss|vue|html)\"",
     "lint:stylelint": "stylelint --fix \"src/**/*.(vue|scss|css)\" --cache --cache-location .cache/stylelint/",
     "lint:lint-staged": "lint-staged -c ./config/lintstagedrc.js",

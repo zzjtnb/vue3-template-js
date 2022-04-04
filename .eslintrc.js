@@ -28,6 +28,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     // reactivity transform
     'vue/no-setup-props-destructure': 'off',
+    'vue/valid-template-root': 'off',
     'vue/component-tags-order': [
       'error',
       {
